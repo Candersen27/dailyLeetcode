@@ -28,9 +28,66 @@ We can just count up the number of turns each player has to survive.  Whoever ha
 
 First we want to turn the string into a list of characters.
 
+Then we initialize variables for both alice and bob's scores.  These values will start at zero and as we iterate through the list of characters, will represent the number of turns bob and alice will have before they lose.
+
+At the end of the iteration we will be able to know who will last the longest and we can declare them the winner by returning either True or False.
+
 """
 
 
 class Solution:
     def winnerOfGame(self, colors):
-        print('Under Construction')
+        
+        # Change the colors string into a list of characters, and initialize bob and alices scores.
+        colors_list = list(colors)
+        a_score = 0
+        b_score = 0
+
+        # Initialize a streak variable.  This will keep track of how many characters in a row are the same.  We start at 1 because the first character in the list will count itself.
+        streak = 1
+        for i in range(1, len(colors_list)):
+            # If the streak continues add one to the value of streak and move on to the next character
+            if colors_list[i] == colors_list[i - 1]:
+                streak += 1
+            
+            # If the streak breaks, we use the streak variable to determine how many points to give which player.
+            else:
+                # We only want to give players points if we get streaks of 3 or more.
+                # For example 'AAAAA' will let alice survive for 3 turns, so that would pass the if statement and we add 3 to her score
+                if colors_list[i-1] == 'A' and streak > 2:
+                    a_score += streak - 2
+                
+                elif colors_list[i-1] == 'B' and streak > 2:
+                    b_score += streak - 2
+
+                # Reset the streak with colors_list[i] being the beginning of the new streak
+                streak = 1
+        
+        # After iterating though the list, we run a final if elif block to give points to a player for the last streak.
+        if colors_list[i] == 'A' and streak > 2:
+            a_score += streak - 2
+                
+        elif colors_list[i] == 'B' and streak > 2:
+            b_score += streak - 2
+
+        
+
+
+
+        print(a_score)
+        print(b_score)
+
+        if a_score > b_score:
+            return True
+        
+        else:
+            return False
+        
+
+
+Sol = Solution
+colors = 'AAAABBBB'
+
+
+r = Sol.winnerOfGame(Sol, colors)
+print(r)
