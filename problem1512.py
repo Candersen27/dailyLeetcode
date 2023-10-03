@@ -41,12 +41,15 @@ class Solution:
                 nums_dict[num] += 1
         # initialize the answer variable we will eventually return this value.
         answer = 0
-
+        
+        # iterate through the keys in nums_dict.  get the value associated with each key and find the value of c(n, 2) where n is the value.  Then add to answer and reassign the sum to answer's value.
         for key in nums_dict:
             value = nums_dict[key]
             combinations = math.comb(value, 2)
             answer += combinations
         
+        # After we're finished, answer should hold the value of the number of pairs in the array.
+    
         return answer
         
 
