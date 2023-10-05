@@ -26,6 +26,39 @@ Strategy:
 """
 
 class Solution:
-    def majorityElement(self, nums)
-        pass
+    def majorityElement(self, nums):
+        
+        # Initialize variables
+        nums_dict = {}
+        answer = []
 
+        # Loop through the nums array, If a value hasnt yet appeared, give it a key value pair and initialize the value as one. If it has already appeared, find its key and add one to the value.
+        for num in nums:
+            if num not in nums_dict:
+                nums_dict[num] = 1
+            
+            else:
+                nums_dict[num] += 1
+
+        # Loop through the entries in the nums_dict dictionary.  for each value, if it is larger than one third the length of the nums array, then we want to return the key as part of our answer.
+        for key in nums_dict:
+            value = nums_dict[key]
+
+            if value > (len(nums)/3):
+                answer.append(key)
+        
+        return answer
+    
+
+Sol = Solution
+
+Q1 = [3, 2, 3]
+Q2 = [1]
+Q3 = [1, 2]
+Q4 = [2, 2, 8, 8, 1, 1, 1, 1, 8, 8]
+
+
+print(Sol.majorityElement(Sol, Q1))
+print(Sol.majorityElement(Sol, Q2))
+print(Sol.majorityElement(Sol, Q3))
+print(Sol.majorityElement(Sol, Q4))
