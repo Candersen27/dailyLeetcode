@@ -52,6 +52,8 @@ Strategy:
     This number shows us how many numbers we do not have to change.  We want to know how many we do have to change, so take the length of the original array nums (including duplicates) and subtract the size of our largest window.  The result will be our return value. 
 
 
+    It's important to note the constraints for this problem.  An array length nums of up to 100,000 can lead to time issues.  We must keep this in mind during the while loop.  We need to avoid using any sort of action with a big O(n) or greater in the while loop.
+
 
 """
 from collections import deque
