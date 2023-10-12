@@ -43,4 +43,11 @@ class MountainArray:
 
 class Solution:
     def findInMountainArray(self, target, mountain_arr):
-        pass
+        print(mountain_arr.get(4))
+
+
+arr = MountainArray([1,2,3,4,5,3,1])
+
+Sol = Solution
+
+Sol.findInMountainArray(Sol, 2, arr)
