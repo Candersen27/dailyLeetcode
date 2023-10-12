@@ -29,7 +29,50 @@ You may recall that an arr is a mountain array if and only if:
 Strategy:
     This problem is a great opportunity to use a binary search algorithm.
 
+    I will implement three total binary searches.  My first search will be to find the peak of the mountain, or max value in the array.
+    The second search will traverse down the array to the left of the peak.
+    The third and final search will traverse down the array to the right of the peak.
+
+    Each search will happen inside a while loop.
     
+    A binary search will look for the median index in the array, and compare it to something.  In the case of our first search, we will grab the value at the median index in the mountain array, and also grab the value at the index to the right of the median.
+        
+        If the value of the median index is less than the value of the next index, we can tell that we are ascending.  This means we are on the left side of the peak, so we want to move to the right.
+        
+        If the value of the median index is greater than the value of the next index, we can tell that we are descending.  This means we are on the right side of the peak, so we want to move to the left.
+
+        To move left we reassign the value assocated with right to the current value of median. (initially left will be zero, the first index in the array. right will be len(array) - 1, the last index in the array.)
+
+        To move right, we reassign the value associated with left to the current value of median.
+
+        After this we recalculate a new median with the updated left and right values, and re-enter our loop
+
+    Eventually we will hit an index where left is equal to right.  When this happens we are spit out of the loop, and will have our mountain peak!
+
+    Quickly check an edge case where the peak ends up being the target.  If so, return the index of the peak.
+
+    Now that we have the peak it is time to traverse down the mountain to look for our target.  We go left side first, because the problem asks for the minimum index for the target.  If there is a target on both the left side and the right side, we just want the left side, so no point traversing the right.
+
+    Set right to the peak index, and left to zero and recalculate the median, then initiate another while loop:
+
+    This while loop will last as long as left is less than right.
+        In the loop, we get the value in the array at the median index, and assign it to focus
+        Check to see if focus is equal to the target.  If so, return the value in median (associated with the index)
+
+        if not, 
+        compare focus to target.  if focus is larger, then we need to move further left.
+            reassign right to median, and recalculate median, then re-enter the loop.
+        if target is larger, we need to move further right.
+            reassign left to median + 1, and recalculate median, then re-enter the loop.
+
+        Eventually we will either hit our target, or traverse the side of the mountain without finding a target.
+
+        If we dont find our target, we move on to the third binary search.
+
+    
+    The third binary search will be very similar to the second, except it will be a mirror image.  We are traversing the opposite side, so when we do our comparisons, when focus > target, we set left = median + 1, and when focus < target, we set right to median.
+
+        Return the index of a target if it is found, but if not, then we conclude that the target is not in our array, and we return -1
         
 
 
@@ -52,11 +95,8 @@ class MountainArray:
 class Solution:
     def findInMountainArray(self, target, mountain_arr):
         
-        
-
+    
         right = mountain_arr.length() - 1
-        
-
         left = 0
 
         median = (right + left) // 2
@@ -146,7 +186,7 @@ class Solution:
                 median = (right + left) // 2
 
             elif focus < target:
-                right = median - 1
+                right = median
                 median = (right + left) // 2
         
         # Check the edge case where the final index of left = right is where the target is. 
